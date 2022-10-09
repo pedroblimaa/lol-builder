@@ -4,8 +4,4 @@ type Champ = {
     image: string;
 }
 
-type ChampObj = {
-    [key: string]: Champ;
-}
-
-export default ChampObj;
+export default Champ;

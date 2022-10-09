@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { BrowserRouter as Router, Link } from 'react-router-dom'
 
 import styles from '../styles/Navbar.module.css'
 import iconLol from '../assets/lol-icon.png'
@@ -17,16 +18,16 @@ export default function Navbar() {
             <menu className="menu">
                 <Sandwich onClick={toggleMenu} />
                 <ul className={styles.SideMenu + ' ' + (showMenu ? 'show' : 'hide-menu')}>
-                    <a href="/">
+                    <Link to="/" onClick={toggleMenu}>
                         <li>
                             Home
                         </li>
-                    </a>
-                    <a href="/champs">
+                    </Link>
+                    <Link to="/champs" onClick={toggleMenu}>
                         <li>
                             Champions
                         </li>
-                    </a>
+                    </Link>
                 </ul>
             </menu>
             <img className={styles.MainIcon} src={iconLol} alt="League of Legends Icon" />

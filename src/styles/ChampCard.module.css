@@ -1,0 +1,36 @@
+.ListItem {
+    width: 80px;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    border-radius: 5px;
+}
+
+.ItemName {
+    width: 60px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ImageContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ImageContainer img {
+    width: 60px;
+    height: 60px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: auto;
+    margin-right: auto;
+}

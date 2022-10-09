@@ -1,33 +1,38 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
-import lolApiService from '../services/lolApiService';
-import ChampObj from '../model/Champ';
+import ChampObj from '../model/ChampsObj';
+import ChampCard from '../components/ChampCard';
 import styles from '../styles/Champs.module.css';
 
+export default function Champs({ champs }: { champs: ChampObj }) {
+    const [search, setSearch] = useState('');
+    const [filteredChamps, setFilteredChamps] = useState(champs);
 
-export default function Champs() {
-    const [champs, setChamps] = useState({} as ChampObj);
+    const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const searchValue = e.target.value.toLowerCase();
+        setSearch(searchValue);
 
-    useEffect(() => {
-        const fetchChamps = async () => {
-            const data = await lolApiService.getLolChampions()
-            setChamps(data)
-        }
+        const filteredNames = Object.keys(champs).filter((champ) => {
+            return champ.toLowerCase().includes(searchValue)
+        })
 
-        fetchChamps()
-    }, []);
+        const filteredChamps = filteredNames.reduce((acc: ChampObj, champ: string) => {
+            acc[champ] = champs[champ]
+            return acc;
+        }, {})
+
+        setFilteredChamps(filteredChamps);
+    }
+
+
 
     return (
         <div className='page'>
             <h1 className={styles.Title}>Champions</h1>
+            <input className={styles.Search} type='text' placeholder='Search...' onChange={(e) => handleSearch(e)} />
             <ul className={styles.ChampList}>
-                {Object.keys(champs).map((champ) => (
-                    <li key={champs[champ].id}>
-                        <h2>{champs[champ].name}</h2>
-                        <div className={styles.ImageContainer}>
-                            <img src={champs[champ].image} alt={champ + ' Image'} />
-                        </div>
-                    </li>
+                {Object.keys(filteredChamps).map((champ) => (
+                    <ChampCard key={filteredChamps[champ].id} champ={filteredChamps[champ]} />
                 ))}
             </ul>
         </div>

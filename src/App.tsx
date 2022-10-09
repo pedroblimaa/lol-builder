@@ -1,28 +1,38 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { useState, useEffect } from 'react'
 
 import logo from './logo.svg'
 import './App.css'
-
+import Navbar from './components/Navbar'
 import Home from './pages/Home'
 import Champs from './pages/Champs'
-import Navbar from './components/Navbar'
+import Build from './pages/Build'
+import ChampObj from './model/ChampsObj'
+import lolApiService from './services/lolApiService'
 
-import { createBrowserRouter, RouterProvider, Route } from 'react-router-dom'
-import React from 'react'
 
 function App() {
+  const [champs, setChamps] = useState({} as ChampObj);
 
-  const router = createBrowserRouter([
-    { path: '/', element: <Home logo={logo} /> },
-    { path: '/champs', element: <Champs /> },
-  ])
+  useEffect(() => {
+    const fetchChamps = async () => {
+      const data = await lolApiService.getLolChampions()
+      setChamps(data)
+    }
+
+    fetchChamps()
+  }, []);
+
 
   return (
-    <>
+    <Router>
       <Navbar />
-      <React.StrictMode>
-        <RouterProvider router={router} />
-      </React.StrictMode>
-    </>
+      <Routes>
+        <Route path={'/'} element={<Home logo={logo} />} />
+        <Route path={'/champs'} element={<Champs champs={champs} />} />
+        <Route path={'/build'} element={<Build />} />
+      </Routes>
+    </Router>
   )
 }
 
