@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/lol-builder/static/css/main.2554037a.css",
+    "main.js": "/lol-builder/static/js/main.7e2525e7.js",
+    "static/js/787.5c9de5eb.chunk.js": "/lol-builder/static/js/787.5c9de5eb.chunk.js",
+    "static/media/lol-icon.png": "/lol-builder/static/media/lol-icon.bb7c46c46cbec0fdf24e.png",
+    "static/media/logo.svg": "/lol-builder/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/lol-builder/index.html",
+    "main.2554037a.css.map": "/lol-builder/static/css/main.2554037a.css.map",
+    "main.7e2525e7.js.map": "/lol-builder/static/js/main.7e2525e7.js.map",
+    "787.5c9de5eb.chunk.js.map": "/lol-builder/static/js/787.5c9de5eb.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2554037a.css",
+    "static/js/main.7e2525e7.js"
+  ]
+}
