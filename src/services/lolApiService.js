@@ -1,25 +1,27 @@
 const getLolChampions = async () => {
-    const response = await fetch('http://ddragon.leagueoflegends.com/cdn/10.25.1/data/en_US/champion.json');
-    const data = await response.json();
+    const response = await fetch('http://ddragon.leagueoflegends.com/cdn/10.25.1/data/en_US/champion.json')
+    const data = await response.json()
     const champs = data.data
+    const baseUrl = 'http://ddragon.leagueoflegends.com/cdn/10.25.1/img/champion/'
 
-    const imagesToFetch = Object.keys(champs).map((champ) => {
-        return champs[champ].image.full;
-    });
+    Object.keys(champs).forEach(champ => {
+        champs[champ].image = baseUrl + champ + '.png'
+    })
 
-    const images = await Promise.all(imagesToFetch.map((image) => {
-        return fetch(`http://ddragon.leagueoflegends.com/cdn/10.25.1/img/champion/${image}`);
-    }));
+    return champs
+}
 
-    Object.keys(champs).forEach((champ, index) => {
-        champs[champ].image = images[index].url;
-    });
+const getChampInfo = async (champName) => {
+    const response = await fetch(`http://ddragon.leagueoflegends.com/cdn/10.25.1/data/en_US/champion/${champName}.json`)
+    const data = await response.json()
+    const champ = data.data[champName]
 
-    return champs;
+    return champ
 }
 
 const lolApiService = {
     getLolChampions: getLolChampions,
+    getChampInfo: getChampInfo
 }
 
-export default lolApiService;
+export default lolApiService
